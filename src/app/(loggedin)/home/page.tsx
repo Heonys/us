@@ -2,6 +2,7 @@
 import usePostsQuery from "@/hooks/usePostsQuery";
 import ContentCard from "../_components/ContentCard";
 import { useState } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
@@ -14,7 +15,7 @@ const HomePage = () => {
     setPage(pageNumber);
   };
 
-  if (!posts) return <div>로딩중</div>;
+  if (!posts) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -23,6 +24,7 @@ const HomePage = () => {
           return (
             <ContentCard
               key={post.id}
+              id={post.id}
               name={post.expand.author.name}
               job={post.expand.author.job}
               profileImage={post.expand.author.profileImage}

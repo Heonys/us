@@ -1,10 +1,11 @@
 import { getDetailPostById } from "@/api/post";
+import { Item } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-const useDetailPostQuery = () => {
-  const postsQuery = useQuery({
-    queryKey: [""],
-    queryFn: () => getDetailPostById("afeq4igf5gou2i2"),
+const useDetailPostQuery = (id: string) => {
+  const postsQuery = useQuery<Item>({
+    queryKey: ["post", id],
+    queryFn: () => getDetailPostById(id),
   });
 
   return { postsQuery };
