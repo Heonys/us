@@ -1,5 +1,7 @@
 "use client";
 import useDetailPostQuery from "@/hooks/useDetailPostQuery";
+import Contents from "./_components/Contents";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type Props = {
   params: {
@@ -12,9 +14,16 @@ const ContentsPage = ({ params: { id } }: Props) => {
     postsQuery: { data: post },
   } = useDetailPostQuery(id);
 
-  console.log(post);
+  if (!post) return <LoadingSpinner />;
 
-  return <div>{id}</div>;
+  return (
+    <div className="flex flex-col items-center ">
+      <div className="text-lg font-bold absolute top-[38px]">{post?.title}</div>
+      <div className="max-w-screen-md mx-auto absolute top-[140px]">
+        <Contents text={post.text} type={post.type} mediaUrl={post.mediaUrl} />
+      </div>
+    </div>
+  );
 };
 
 export default ContentsPage;

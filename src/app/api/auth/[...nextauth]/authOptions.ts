@@ -1,7 +1,8 @@
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-export const authOption = {
+export const authOption: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
@@ -31,7 +32,6 @@ export const authOption = {
         );
 
         if (!response.ok) {
-          console.log("check your credentials");
           return null;
         }
 
@@ -44,11 +44,19 @@ export const authOption = {
   pages: {
     signIn: "/login",
   },
-  secret: process.env.AUTH_SECRET,
-  // session: {
-  //   strategy: "jwt",
-  //   maxAge: 30 * 24 * 60 * 60, //30일
-  // },
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.accessToken = user.token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken as string;
+      return session;
+    },
+  },
 };
 
 export default authOption;

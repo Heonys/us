@@ -3,7 +3,6 @@ import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import QueryClientProvider from "./QueryClientProvider";
-import RecoilProvider from "./RecoilProvider";
 import AuthProvider from "./AuthProvider";
 
 const notoSansKr = Noto_Sans_KR({
@@ -25,9 +24,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKr.className}>
         <AuthProvider>
-          <RecoilProvider>
-            <QueryClientProvider>{children}</QueryClientProvider>
-          </RecoilProvider>
+          <QueryClientProvider>{children}</QueryClientProvider>
         </AuthProvider>
       </body>
     </html>

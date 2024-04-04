@@ -1,6 +1,7 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
@@ -17,9 +18,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white max-w-screen-xl flex items-center justify-between mx-auto p-4">
-      <Image src="/images/logo.png" alt="logo" width="52" height="52" />
-      {data ? "로그인 상태" : "로그아웃 상태"}
+    <nav className="bg-white  flex items-center justify-between mx-auto p-6">
+      <Link href="/home">
+        <Image src="/images/logo.png" alt="logo" width="52" height="52" />
+      </Link>
       <button
         className="btn btn-outline border-[#13C296] text-[#13C296] btn-sm"
         onClick={handleLogout}

@@ -50,3 +50,22 @@ export interface News {
   title: string;
   updated: string;
 }
+
+export interface LoginResponse {
+  record: Record;
+  token: string;
+}
+
+export interface Record {
+  avatar: string;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  email: string;
+  emailVisibility: boolean;
+  id: string;
+  name: string;
+  updated: string;
+  username: string;
+  verified: boolean;
+}

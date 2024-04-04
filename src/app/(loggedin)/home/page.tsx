@@ -36,19 +36,19 @@ const HomePage = () => {
         })}
       </ul>
 
-      <div className="join py-4">
-        {[1, 2, 3, 4, 5].map((v) => {
+      <ul className="join py-4">
+        {Array.from({ length: posts.totalPages }, (_, i) => i + 1).map((v) => {
           return (
-            <button
+            <li
               key={v}
               className={`join-item btn ${v === page ? "btn-active" : ""}`}
               onClick={() => handlePageChange(v)}
             >
               {v}
-            </button>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };
