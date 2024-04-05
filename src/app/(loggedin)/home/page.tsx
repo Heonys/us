@@ -1,25 +1,23 @@
 "use client";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import usePostsQuery from "@/hooks/usePostsQuery";
 import ContentCard from "../_components/ContentCard";
-import { useState } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 const HomePage = () => {
-  const [page, setPage] = useState(1);
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1");
 
   const {
     postsQuery: { data: posts },
   } = usePostsQuery(page);
 
-  const handlePageChange = (pageNumber: number) => {
-    setPage(pageNumber);
-  };
-
   if (!posts) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <ul className="space-y-3">
+      <ul className="space-y-[40px]">
         {posts.items.map((post) => {
           return (
             <ContentCard
@@ -39,13 +37,13 @@ const HomePage = () => {
       <ul className="join py-4">
         {Array.from({ length: posts.totalPages }, (_, i) => i + 1).map((v) => {
           return (
-            <li
+            <Link
               key={v}
+              href={`/home?page=${v}`}
               className={`join-item btn ${v === page ? "btn-active" : ""}`}
-              onClick={() => handlePageChange(v)}
             >
               {v}
-            </li>
+            </Link>
           );
         })}
       </ul>

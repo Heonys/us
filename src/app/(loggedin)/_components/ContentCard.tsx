@@ -24,8 +24,8 @@ const ContentCard = ({
   description,
 }: Props) => {
   return (
-    <div className="w-[570px] border-1 shadow-md px-[35px] py-5 rounded-xl flex flex-col gap-4">
-      <Link href={`/contents/${id}`}>
+    <div className="w-[570px] border-1 shadow-md px-[35px] py-3 rounded-xl flex flex-col">
+      <Link href={`/contents/${id}`} className="space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
             <div className="avatar">
